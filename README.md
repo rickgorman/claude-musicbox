@@ -1,5 +1,7 @@
 ![Agent Familiar](hero.png)
 
+**Your agents' state, spoken in creature calls.**
+
 A familiar for your coding-agent sessions — a small creature that watches what you cannot see and speaks up. A hook reads the tail of the session transcript, runs it through local embeddings, and plays a short organic creature call (or musical motif) that tells you what the session needs and how it's going — without looking at the screen.
 
 A triumphant whoop means tests went green. A low growl means something broke — the deeper the growl, the bigger the trouble. Insistent croaks mean the session is blocked waiting on you. Over a few dozen hearings, you stop translating and just *know*.
