@@ -4,7 +4,7 @@ A triumphant whoop means tests went green. A low growl means something broke —
 
 A hook reads the tail of the session transcript, runs it through local embeddings, and plays a short organic creature call (or musical motif) that tells you what the session needs and how it's going — without looking at the screen.
 
-## Demo
+## Demo (WITH SOUND -- UNMUTE!)
 
 🔊 **Unmute for the creature calls** — they're the whole point.
 
