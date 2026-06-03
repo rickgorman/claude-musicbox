@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+voices/
+notes/
+state.json
+anchors.embedded.json

@@ -1,0 +1,232 @@
+{
+  "anchors": [
+    {
+      "name": "triumph",
+      "class": "success",
+      "val": "pos", "aro": "hi",
+      "exemplars": [
+        "All tests pass, shipped to production",
+        "Done, merged to main, everything green",
+        "Fixed it, the whole suite is passing now",
+        "Deploy succeeded, perfect, ready to go",
+        "Nailed it, clean build, all checks pass"
+      ]
+    },
+    {
+      "name": "quiet_done",
+      "class": "success",
+      "val": "pos", "aro": "lo",
+      "exemplars": [
+        "ok, that's done",
+        "small fix landed, nothing else needed",
+        "wrapped up, all good",
+        "finished the change, looks fine",
+        "committed, that should do it"
+      ]
+    },
+    {
+      "name": "relief_resolved",
+      "class": "success",
+      "val": "pos", "aro": "lo",
+      "exemplars": [
+        "finally working after all that",
+        "phew, fixed at last",
+        "resolved, what a relief",
+        "stable again, the error is gone",
+        "that finally cleared it up"
+      ]
+    },
+    {
+      "name": "discovery",
+      "class": "success",
+      "val": "pos", "aro": "hi",
+      "exemplars": [
+        "found the root cause",
+        "aha, that is the bug",
+        "figured it out, the issue is the off by one",
+        "now I see why it was failing",
+        "got it, the race condition was in the lock"
+      ]
+    },
+    {
+      "name": "catastrophe",
+      "class": "error",
+      "val": "neg", "aro": "hi",
+      "exemplars": [
+        "Fatal crash, segmentation fault",
+        "Everything is broken, production is down",
+        "Data loss, this is irreversible",
+        "Critical failure, the whole pipeline aborted",
+        "The database is corrupt, total meltdown"
+      ]
+    },
+    {
+      "name": "urgent_alert",
+      "class": "error",
+      "val": "neg", "aro": "hi",
+      "exemplars": [
+        "urgent, act now",
+        "emergency, the system is failing",
+        "alert, immediate attention needed",
+        "drop everything, this is critical",
+        "red alert, customers are affected"
+      ]
+    },
+    {
+      "name": "mild_setback",
+      "class": "error",
+      "val": "neg", "aro": "lo",
+      "exemplars": [
+        "one test failed, will fix later",
+        "minor issue, not urgent",
+        "small bug, no big deal",
+        "a warning showed up, nothing serious",
+        "slight hiccup, easy to patch"
+      ]
+    },
+    {
+      "name": "frustration_stuck",
+      "class": "error",
+      "val": "neg", "aro": "mid",
+      "exemplars": [
+        "still stuck on this",
+        "can't get it to work",
+        "blocked again on the same error",
+        "going in circles, nothing helps",
+        "tried everything and it still fails",
+        "the same test keeps failing with a constraint violation",
+        "hitting the same exception on every run"
+      ]
+    },
+    {
+      "name": "inquiry",
+      "class": "question",
+      "val": "neu", "aro": "lo",
+      "exemplars": [
+        "should I proceed?",
+        "do you want me to continue?",
+        "which option do you prefer?",
+        "what would you like next?",
+        "shall I go ahead with this approach?"
+      ]
+    },
+    {
+      "name": "risky_decision",
+      "class": "question",
+      "val": "neg", "aro": "hi",
+      "exemplars": [
+        "should I force push and override main?",
+        "do you want me to delete this permanently?",
+        "confirm dropping the production table?",
+        "overwrite the file without a backup?",
+        "are you sure you want to reset everything?"
+      ]
+    },
+    {
+      "name": "grind_code",
+      "class": "code",
+      "val": "neu", "aro": "mid",
+      "exemplars": [
+        "editing the function, refactoring the service",
+        "grep, commit, npm run, rspec",
+        "writing the migration and the model",
+        "patching the controller and the spec",
+        "renaming the method across the codebase"
+      ]
+    },
+    {
+      "name": "progress_steady",
+      "class": "status",
+      "val": "pos", "aro": "mid",
+      "exemplars": [
+        "step two of five complete",
+        "making steady progress",
+        "halfway through the migration",
+        "continuing the refactor, on track",
+        "building, about sixty percent done"
+      ]
+    },
+    {
+      "name": "waiting_idle",
+      "class": "status",
+      "val": "neu", "aro": "lo",
+      "exemplars": [
+        "waiting for the build to finish",
+        "idle, standing by",
+        "running in the background, will take a while",
+        "nothing to do yet, holding",
+        "queued, waiting on the upstream job"
+      ]
+    },
+    {
+      "name": "curiosity_explore",
+      "class": "status",
+      "val": "pos", "aro": "lo",
+      "exemplars": [
+        "exploring the codebase",
+        "let me look around the modules",
+        "investigating how this works",
+        "reading through the service layer",
+        "poking at the architecture to understand it"
+      ]
+    },
+    {
+      "name": "neutral_info",
+      "class": "status",
+      "val": "neu", "aro": "lo",
+      "exemplars": [
+        "here is the summary",
+        "for reference, the config lives in the engine",
+        "note that the structure is as follows",
+        "the file is located under app services",
+        "to recap, there are three components"
+      ]
+    },
+    {
+      "name": "warning_risk",
+      "class": "error",
+      "val": "neg", "aro": "hi",
+      "exemplars": [
+        "careful, this operation is destructive",
+        "this will delete data permanently",
+        "dangerous change ahead, proceed with caution",
+        "heads up, this could break other consumers",
+        "risky migration, it locks the table"
+      ]
+    }
+  ],
+  "axes": {
+    "certainty": {
+      "pos": [
+        "definitely the fix, confirmed and verified",
+        "I am certain this is correct",
+        "verified, the tests prove it works",
+        "clearly the root cause, no doubt about it",
+        "guaranteed to work, fully reproducible"
+      ],
+      "neg": [
+        "maybe this helps, not sure though",
+        "I think it might be the issue, hard to tell",
+        "possibly related, can't confirm yet",
+        "unclear why this happens, strange",
+        "perhaps, but I could easily be wrong"
+      ]
+    },
+    "progress": {
+      "pos": [
+        "making steady progress, halfway done",
+        "step three complete, moving on to the next",
+        "advancing through the plan smoothly",
+        "almost finished, one item left",
+        "good momentum, cruising through the work"
+      ],
+      "neg": [
+        "stuck on the same error again",
+        "no progress, going in circles",
+        "blocked, can't move forward at all",
+        "still failing after many attempts",
+        "spinning wheels, nothing is working"
+      ]
+    }
+  }
+}
