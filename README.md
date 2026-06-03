@@ -1,6 +1,6 @@
-![Claude Familiar](hero.png)
+![Agent Familiar](hero.png)
 
-A familiar for your Claude Code sessions — a small creature that watches what you cannot see and speaks up. A hook reads the tail of the session transcript, runs it through local embeddings, and plays a short organic creature call (or musical motif) that tells you what the session needs and how it's going — without looking at the screen.
+A familiar for your coding-agent sessions — a small creature that watches what you cannot see and speaks up. A hook reads the tail of the session transcript, runs it through local embeddings, and plays a short organic creature call (or musical motif) that tells you what the session needs and how it's going — without looking at the screen.
 
 A triumphant whoop means tests went green. A low growl means something broke — the deeper the growl, the bigger the trouble. Insistent croaks mean the session is blocked waiting on you. Over a few dozen hearings, you stop translating and just *know*.
 
@@ -52,8 +52,8 @@ curl -s localhost:11434/api/tags | grep all-minilm && echo OK
 ### 2. Setup
 
 ```bash
-git clone https://github.com/rickgorman/claude-familiar ~/work/claude-familiar
-ln -s ~/work/claude-familiar ~/.claude/musicbox
+git clone https://github.com/rickgorman/agent-familiar ~/work/agent-familiar
+ln -s ~/work/agent-familiar ~/.claude/musicbox
 
 cd ~/.claude/musicbox
 python3 build_anchors.py   # embeds affect axes + texture bank (~1s, needs ollama up)
