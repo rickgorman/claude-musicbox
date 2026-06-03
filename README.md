@@ -8,23 +8,92 @@ A triumphant whoop means tests went green. A low growl means something broke —
 
 - macOS (uses `sox` for synthesis and `afplay` for playback)
 - Python 3.10+ (stdlib only — no pip installs)
-- [sox](https://sox.sourceforge.net/) (`brew install sox`)
+- [sox](https://sox.sourceforge.net/)
 - [ollama](https://ollama.com) running locally, for embeddings
 - [Claude Code](https://claude.com/claude-code)
 
 ## Installation
 
+### 1. Prerequisites
+
+**Homebrew** (skip if you have it):
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+**sox** — the synthesizer:
+
 ```bash
 brew install sox
-ollama pull all-minilm
+sox --version   # should print SoX vXX.Y.Z
+```
 
+**Python 3.10+** — macOS usually has it; check, and install via brew if missing:
+
+```bash
+python3 --version || brew install python3
+```
+
+**ollama** — local embeddings. Install it, *start it*, then pull the model:
+
+```bash
+brew install ollama
+brew services start ollama          # or just open the Ollama app
+ollama pull all-minilm              # 46MB embedding model
+
+# verify it's serving:
+curl -s localhost:11434/api/tags | grep all-minilm && echo OK
+```
+
+> If ollama isn't running, musicbox silently falls back to a cruder
+> lexicon-based analysis — it still makes sounds, they're just less smart.
+
+### 2. Setup
+
+```bash
 git clone https://github.com/rickgorman/claude-musicbox ~/work/claude-musicbox
 ln -s ~/work/claude-musicbox ~/.claude/musicbox
 
 cd ~/.claude/musicbox
-python3 build_bank.py      # one-time: render the note bank (~0.2s)
-python3 build_anchors.py   # one-time: embed affect axes + texture bank (~1s)
+python3 build_anchors.py   # embeds affect axes + texture bank (~1s, needs ollama up)
+python3 build_bank.py      # optional: note bank for the legacy --engine bank fallback
 ```
+
+### 3. Smoke test
+
+```bash
+echo "all tests pass, shipped to production" \
+  | python3 ~/.claude/musicbox/musicbox.py play --mode creature
+```
+
+You should hear a happy whoop-chirp within ~300ms. If you hear nothing:
+
+| symptom | fix |
+|---|---|
+| silence, no error | check output device + volume; try `MUSICBOX_VOLUME=1.0` |
+| `sox: command not found` in stderr | `brew install sox` |
+| `phrase` output shows `"source": "bow"` | ollama not serving — `brew services start ollama` |
+| `FileNotFoundError: anchors.embedded.json` | run `python3 build_anchors.py` |
+
+### 4. Wire into Claude Code
+
+Merge into the `hooks` section of `~/.claude/settings.json` (create the file with `{"hooks": {...}}` if it doesn't exist; if you already have `Stop`/`Notification` hooks, append to their arrays):
+
+```json
+"Notification": [
+  { "matcher": "", "hooks": [
+    { "type": "command", "command": "~/.claude/musicbox/hook.sh" }
+  ]}
+],
+"Stop": [
+  { "matcher": "", "hooks": [
+    { "type": "command", "command": "~/.claude/musicbox/hook.sh" }
+  ]}
+]
+```
+
+`Stop` infers the call from the transcript tail. `Notification` always plays the blocked-waiting-on-you croak. Hooks are snapshotted at session launch — **restart Claude Code sessions to pick this up**.
 
 ## Quick Start
 
@@ -44,26 +113,7 @@ echo "still failing with the same constraint violation" | python3 musicbox.py ph
 
 Returns the full analysis: need, valence, arousal, certainty, familiarity, trajectory movement, loop detection, and the composed events.
 
-### 3. Wire into Claude Code
-
-Add to the `hooks` section of `~/.claude/settings.json`:
-
-```json
-"Notification": [
-  { "matcher": "", "hooks": [
-    { "type": "command", "command": "~/.claude/musicbox/hook.sh" }
-  ]}
-],
-"Stop": [
-  { "matcher": "", "hooks": [
-    { "type": "command", "command": "~/.claude/musicbox/hook.sh" }
-  ]}
-]
-```
-
-`Stop` infers the call from the transcript tail. `Notification` always plays the blocked-waiting-on-you croak. New sessions pick up the hook on launch.
-
-### 4. Tune
+### 3. Tune
 
 ```bash
 MUSICBOX_VOLUME=0.5        # playback volume (default 0.35)

@@ -3,7 +3,7 @@
 # Reads the hook JSON on stdin, tails the transcript, plays. Fire-and-forget.
 
 MUSICBOX_DIR="$HOME/.claude/musicbox"
-PY=/opt/homebrew/bin/python3
+PY=$(command -v python3 || echo /usr/bin/python3)
 
 input=$(cat)
 meta=$(printf '%s' "$input" | $PY -c '
